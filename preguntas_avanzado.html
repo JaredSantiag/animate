@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>	<meta charset="utf-8">
+	<title>Preguntas nivel avanzado</title>
+	<link rel="stylesheet" type="text/css" href="estilo.css">
+	<script src="jquery-3.4.1.min.js"></script>
+	<script src="sweetalert2.all.min.js"></script>
+	<script src="all.js"></script>
+	<script src="jquery-3.4.1.min.js"></script> 
+	<script src="all.js"></script>
+		<link rel="stylesheet" type="text/css" href="reset.css" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+	<h2>Nivel avanzado</h2>
+			<div class="item" id="item-5">
+				<div class="sub-grid">
+					<div class="text-container">
+					<div  id = "pregunta"> </div>
+					<div  id = "respuestas"> </div>
+					</div>
+					<nav class="nav-container" role="navigation">
+				<a href="preguntas_basico.html" class="nav-previous"><img class="nav-icon" src="images/icon-left.svg" alt="Back"><span>Nivel Basico</span></a>
+				<a href="preguntas_intermedio.html" class="nav-jump"><img src="images/icon-left.svg">Nivel Intermedio</a>
+				<a href="index_avanzado.html" class="nav-menu"><img class="nav-menu" src="images/volver.ico" alt="More Rats"><span>leccion Avanzado</span>
+				<a href="index.html" class="nav-next"><img class="nav-icon" src="images/home.ico" ><span> Menu Principal</span></a>
+					</nav>
+				</div>
+			</div>
+	<script>
+
+	var preguntas = [
+	"Si Sara tiene 5/8 de rebanadas de pai y Diana tiene 9/12 del mismo pai ¿Quién tiene mayor cantidad de pai? ",
+	"David tiene 24 dulces para repartir y Fernando tiene 18. Si desean regalar los dulces a sus respectivos familiares de modo que todos tengan la misma cantidad y que sea la mayor posible, ¿cuántos dulces repartiran a cada persona?",
+	"Alan y Pedro comen en la misma taquería, pero Alan asiste cada 20 días y Pedro cada 38. ¿Cuándo volverán a encontrarse?",
+	"Si Diana tiene 2/4 de pizza y Arlen 1/2 de pizza ¿Tienen la misma cantidad de pizza? ",
+	"Si tenemos 1/2, ¿Por cuál numero lo multiplicamos para que sea igual a 1?",
+	"Gerardo debe de trabajar 2/3 de hora y Sergio 4/2 de hora ¿Quién trabajara menos?",
+	"Karla tiene 14 flores e Itzel 28 flores ¿cuántas flores les tocarian si tuvieran  que repartir cada una para la mayor cantidad de amigos?",
+	"Jorge toma el metrobús cada 14 días e Ivan cada 49 días a las 9:00 en la misma estación ¿En que tiempo se encontraran juntos tomando el transporte?",
+	"La feria “Espectacular” tiene 12/18 de su capcidad máxima y la feria “Asombrosa” le falta 2/3 para estar completamente llena, ambas con capacidad de 5000 personas ¿Qué feria esta más cerca de su capacidad máxima?",
+	"Si un jardín tiene ¼ de flores en tu terreno, por cuál fracción se debe multiplicar para que  este completo de flores? ",
+
+	];
+	var respuestas = [
+	["3/4","3/8","6/6"],
+	["8/12","12/12","5/6"],
+	["1/6","1/2","1/3"],
+	["1/2","3/8","3/4"],
+	["21/8","8/8","24/8"],
+	["2/5","1/5","1/4"],
+	["24/4","2/8","1/3"],
+	["10/9","2/8","1/3"],
+	["10/9","2/8","1/3"],
+	["10/9","2/8","1/3"],	
+	];
+	var imag = [
+	['images/a1-1.png','images/a1-2.png','images/a1-3.png'],
+	['images/a2-1.png','images/a2-2.png','images/a2-3.png'],
+	['images/a3-1.png','images/a3-2.png','images/a3-3.png'],
+	['images/a4-1.png','images/a4-2.png','images/a4-3.png'],
+	['images/a5-1.png','images/a5-2.png','images/a5-3.png'],
+	['images/a6-1.png','images/a6-2.png','images/a6-3.png'],
+	['images/a7-1.png','images/a7-2.png','images/a7-3.png'],
+	['images/a8-1.png','images/a8-2.png','images/a8-3.png'],
+	['images/a9-1.png','images/a9-2.png','images/a9-3.png'],
+	['images/a10-1.png','images/a10-2.png','images/a10-3.png'],
+	];
+
+var lista = [0,1,2,3,4,5,6,7,8,9];
+lista = lista.sort(function() {return Math.random() - 0.5});
+var index=0;
+			var orden = 0;
+			var puntaje = 0;
+			var leccion = 0;
+			var respuesta;
+			var posicion_aleatoria;
+	var indice_respuesta_correcta;
+	jugar();
+
+$(".botones").click(comprobar);
+
+function comprobar()
+{ 
+	
+var respuesta = $(this).val();
+if(respuesta== indice_respuesta_correcta)
+			{
+								Swal.fire({
+								  type: 'success',
+								  text: 'Respuesta Correcta'
+								})
+								 puntaje +=1.25;
+
+			}
+				else{
+					Swal.fire({
+					 type: 'error',
+					text: 'Respuesta Incorrecta'
+					})
+			}
+			orden +=1;
+		if (orden >=8) {
+								if(puntaje>=6)
+								{
+									Swal.fire({
+										  text:"¡MUY BIEN! Tu calificacion fue de: "+puntaje,
+										  imageUrl: "images/feliz.gif",
+										    showCancelButton: true,
+										  confirmButtonColor: '#3085d6',
+										  cancelButtonColor: 'green',
+										  cancelButtonText: 'Repetir nivel',
+										  confirmButtonText: 'Ir al Menu principal'	
+										}).then((result) => {
+										  if (!result.value) {	 
+										  	location.reload();
+										  }
+										  else{
+										  	window.location="index.html";
+										  }
+										})
+								}else{
+										Swal.fire({
+										  text:"¡SIGUE PRACTICANDO! Tu calificacion fue de: "+puntaje,
+										  imageUrl: "images/triste.gif",
+										    showCancelButton: true,
+										  confirmButtonColor: '#3085d6',
+										  cancelButtonColor: 'green',
+										  cancelButtonText: 'Repetir nivel',
+										  confirmButtonText: 'Ir al Menu principal'	
+										}).then((result) => {
+										  if (!result.value) {
+										  	location.reload();
+										  }
+										  else{
+										  	window.location="index.html";
+										  }
+										})
+								}
+				}
+				else
+					{index+=1;
+						jugar();
+						}
+$(".botones").click(comprobar);
+
+}	
+
+
+function jugar(){
+	 document.getElementById("respuestas").innerHTML = '';
+	 document.getElementById("pregunta").innerHTML = '';
+							var posiciones = [0,1,2];
+						    var respuestas_reordenadas = [];
+							var imagenes_reordenadas = [];
+							var bandera = false;
+							var posicion_pregunta =Math.floor(Math.random()*posiciones.length);
+						    var respuestas_posibles = respuestas[lista[index]];
+							var imagenes_posibles = imag[lista[index]];
+							document.getElementById("pregunta").innerHTML = preguntas[lista[index]];
+							for(i in respuestas_posibles){
+									 posicion_aleatoria = Math.floor(Math.random()*posiciones.length);
+									if(posicion_aleatoria==0 && bandera == false)
+									{
+										indice_respuesta_correcta = i;
+										bandera = true;
+									}
+								respuestas_reordenadas[i] = respuestas_posibles[posiciones[posicion_aleatoria]];
+							imagenes_reordenadas[i] = imagenes_posibles[posiciones[posicion_aleatoria]];
+								posiciones.splice(posicion_aleatoria,1);
+							}
+							var txt_respuestas= "";
+								for(i in respuestas_reordenadas){
+								txt_respuestas += '<button id="btns" class="botones" value="'+i+'" onclick="comprobar()" ><img src="'+imagenes_reordenadas[i]+'"></button>';
+							
+							}
+							document.getElementById("respuestas").innerHTML = txt_respuestas;
+
+			}
+
+
+
+
+</script>
+</body>
+</html>

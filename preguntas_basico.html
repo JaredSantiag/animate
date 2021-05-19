@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>	<meta charset="utf-8">
+	<title>Preguntas nivel basico</title>
+	<link rel="stylesheet" type="text/css" href="estilo.css">
+	<script src="jquery-3.4.1.min.js"></script>
+	<script src="sweetalert2.all.min.js"></script>
+	<script src="all.js"></script>
+	<script src="jquery-3.4.1.min.js"></script> 
+	<script src="all.js"></script>
+		<link rel="stylesheet" type="text/css" href="reset.css" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+	<h2>Nivel basico</h2>
+			<div class="item" id="item-5">
+				<div class="sub-grid">
+					<div class="text-container">
+					<div  id = "pregunta"> </div>
+					<div  id = "respuestas"> </div>
+					</div>
+					<nav class="nav-container" role="navigation">
+				<a href="preguntas_intermedio.html" class="nav-previous"><img class="nav-icon" src="images/icon-right.svg" alt="Back"><span>Nivel intermedio</span></a>
+				<a href="preguntas_avanzado.html" class="nav-jump"><img src="images/icon-right.svg">Nivel avanzado</a>
+				<a href="index_basico.html" class="nav-menu"><img class="nav-menu" src="images/volver.ico" alt="More Rats"><span>leccion Basico</span>
+				<a href="index.html" class="nav-next"><img class="nav-icon" src="images/home.ico" ><span> Menu Principal</span></a>
+					</nav>
+				</div>
+			</div>
+	<script>
+
+	var preguntas = [
+	"¿Qué fracción es  dos tercios? ",
+	"Luis se comió 5/12 del pastel y Antonio 3/12 del mismo ¿Qué fracción de los pasteles se comieron?",
+	"¿Qué fracción es un octavo?",
+	"¿Como se leé la fracción 12/6? ",
+	"¿Como se leé la fracción  3/10?",
+	"¿Qué fracción es seis doceavos?",
+	"¿Qué fracción equivale a 7/4?",
+	"¿A qué es igual la suma 2/8 + 4/8?",
+	"¿Cuál es el resultado de la siguiente resta: 4/8 - 2/8 ",
+	"¿Cuál es el resultado de la resta? 5/7 - 1/7 ",
+
+	];
+	var respuestas = [
+	["2/3","2/2","3/2"],
+	["8/12","6/12","12/8"],
+	["1/8","1/18","8/8"],
+	["doce sextos","doceavos sextos","doce seis"],
+	["tres decimos","tres onceavos","tres novenos"],
+	["a)","b)","c)"],
+	["c)","b)","a)"],
+	["a)","b)","c)"],
+	["3","2","1"],
+	["a)","b)","c)"],	
+	];
+	var imag = [
+	['images/b1.2.png','images/b1.1.png','images/b1.3.png'],
+	['images/b2.1.png','images/b2.2.png','images/b2.3.png'],
+	['images/b3.1.png','images/b3.2.png','images/b3.3.png'],
+	['images/b4.3.png','images/b4.1.png','images/b4.2.png'],
+	['images/b5.2.png','images/b5.1.png','images/b5.3.png'],
+	['images/b6.1.png','images/b6.3.png','images/b6.2.png'],
+	['images/b7.2.png','images/b7.1.png','images/b7.3.png'],
+	['images/b8.1.png','images/b8.2.png','images/b8.3.png'],
+	['images/b9.3.png','images/b9.2.png','images/b9.1.png'],
+	['images/b10.2.png','images/b10.1.png','images/b10.3.png'],
+	];
+
+var lista = [0,1,2,3,4,5,6,7,8,9];
+lista = lista.sort(function() {return Math.random() - 0.5});
+var index=0;
+			var orden = 0;
+			var puntaje = 0;
+			var leccion = 0;
+			var respuesta;
+			var posicion_aleatoria;
+	var indice_respuesta_correcta;
+	jugar();
+
+$(".botones").click(comprobar);
+
+function comprobar()
+{ 
+	
+var respuesta = $(this).val();
+if(respuesta== indice_respuesta_correcta)
+			{
+								Swal.fire({
+								  type: 'success',
+								  text: 'Respuesta Correcta'
+								})
+								 puntaje +=1.25;
+
+			}
+				else{
+					Swal.fire({
+					 type: 'error',
+					text: 'Respuesta Incorrecta'
+					})
+			}
+			orden +=1;
+		if (orden >=8) {
+								if(puntaje>=6)
+								{
+									Swal.fire({
+										  text:"¡MUY BIEN!  calificacion fue de: "+puntaje,
+										  imageUrl: "images/feliz.gif",
+										    showCancelButton: true,
+										  confirmButtonColor: '#3085d6',
+										  cancelButtonColor: 'green',
+										  cancelButtonText: 'Repetir nivel',
+										  confirmButtonText: 'Ir al Menu principal'	
+										}).then((result) => {
+										  if (!result.value) {	 
+										  	location.reload();
+										  }
+										  else{
+										  	window.location="index.html";
+										  }
+										})
+								}else{
+										Swal.fire({
+										  text:"¡SIGUE PRACTICANDO! Tu calificacion fue de: "+puntaje,
+										  imageUrl: "images/triste.gif",
+										    showCancelButton: true,
+										  confirmButtonColor: '#3085d6',
+										  cancelButtonColor: 'green',
+										  cancelButtonText: 'Repetir nivel',
+										  confirmButtonText: 'Ir al Menu principal'	
+										}).then((result) => {
+										  if (!result.value) {
+										  	location.reload();
+										  }
+										  else{
+										  	window.location="index.html";
+										  }
+										})
+								}
+				}
+				else
+					{index+=1;
+						jugar();
+						}
+$(".botones").click(comprobar);
+
+}	
+
+
+function jugar(){
+	 document.getElementById("respuestas").innerHTML = '';
+	 document.getElementById("pregunta").innerHTML = '';
+							var posiciones = [0,1,2];
+						    var respuestas_reordenadas = [];
+							var imagenes_reordenadas = [];
+							var bandera = false;
+							var posicion_pregunta =Math.floor(Math.random()*posiciones.length);
+						    var respuestas_posibles = respuestas[lista[index]];
+							var imagenes_posibles = imag[lista[index]];
+							document.getElementById("pregunta").innerHTML = preguntas[lista[index]];
+							for(i in respuestas_posibles){
+									 posicion_aleatoria = Math.floor(Math.random()*posiciones.length);
+									if(posicion_aleatoria==0 && bandera == false)
+									{
+										indice_respuesta_correcta = i;
+										bandera = true;
+									}
+								respuestas_reordenadas[i] = respuestas_posibles[posiciones[posicion_aleatoria]];
+							imagenes_reordenadas[i] = imagenes_posibles[posiciones[posicion_aleatoria]];
+								posiciones.splice(posicion_aleatoria,1);
+							}
+							var txt_respuestas= "";
+								for(i in respuestas_reordenadas){
+								txt_respuestas += '<button id="btns" class="botones" value="'+i+'" onclick="comprobar()" ><img src="'+imagenes_reordenadas[i]+'"></button>';
+							
+							}
+							document.getElementById("respuestas").innerHTML = txt_respuestas;
+
+			}
+
+
+
+
+</script>
+</body>
+</html>

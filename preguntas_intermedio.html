@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>	<meta charset="utf-8">
+	<title>Preguntas nivel intermedio</title>
+	<link rel="stylesheet" type="text/css" href="estilo.css">
+	<script src="jquery-3.4.1.min.js"></script>
+	<script src="sweetalert2.all.min.js"></script>
+	<script src="all.js"></script>
+	<script src="jquery-3.4.1.min.js"></script> 
+	<script src="all.js"></script>
+		<link rel="stylesheet" type="text/css" href="reset.css" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+	<h2>Nivel intermedio</h2>
+			<div class="item" id="item-5">
+				<div class="sub-grid">
+					<div class="text-container">
+					<div  id = "pregunta"> </div>
+					<div  id = "respuestas"> </div>
+					</div>
+					<nav class="nav-container" role="navigation">
+				<a href="preguntas_basico.html" class="nav-previous"><img class="nav-icon" src="images/icon-left.svg" alt="Back"><span>Nivel Basico</span></a>
+				<a href="index_intermedio.html" class="nav-menu"><img class="nav-menu" src="images/volver.ico" alt="More Rats"><span>leccion Intermedio</span>
+				<a href="index.html" class="nav-next"><img class="nav-icon" src="images/home.ico" ><span> Menu Principal</span></a>
+				<a href="preguntas_avanzado.html" class="nav-jump"><img src="images/icon-right.svg">Nivel avanzado</a>
+					</nav>
+				</div>
+			</div>
+	<script>
+
+	var preguntas = [
+	"Si Daniel tiene un ½ de queso y Luis tiene un ¼ del mismo queso. ¿Cuánto queso tienen en total?",
+	"Si tengo dos rebanadas de pastel una de 2/9 y otra de 4/9. ¿Cuánto pastel tengo en total?",
+	"Si tengo 2/3 de pizza y me como 3/6. ¿Cuánta pizza me sobra?",
+	"Daniela tiene 6/8 de un pai y vende 1/4 ¿Cuánto pai le queda para que siga vendiendo?",
+	"Carlos, a quien le encanta cocinar, usa tres cuartos de kilo de harina para elaborar una torta.  ¿Cuántos necesitará para hacer tres tortas y media?",
+	"Don José dejó 3/5 de la pared para pintar con colores cálidos. Si pintará de color café 2/3 de lo destinado a los colores cálidos, ¿qué parte de la pared será de color café?",
+	"Mina compro compro un queso que pesaba 3/4 de kilo. Si lo partió en porciones de 1/8 de kilo cada una, ¿Cuántas porciones de queso pudo sacar?",
+	"Raúl tiene 2/3 de litros de leche. Si lo quiere repartir en botellas de leche de 3/5. ¿Cuánto litros de leche le tocaran a cada botella?",
+
+	];
+	var respuestas = [
+	["3/4","3/8","6/6"],
+	["8/12","12/12","5/6"],
+	["1/6","1/2","1/3"],
+	["1/2","3/8","3/4"],
+	["21/8","8/8","24/8"],
+	["2/5","1/5","1/4"],
+	["24/4","2/8","1/3"],
+	["10/9","2/8","1/3"],	
+	];
+	var imag = [
+	['images/3.4.png','images/3.8.png','images/6.6.png'],
+	['images/8.12.png','images/12.12.png','images/5.6.png'],
+	['images/1.6.png','images/1.2.png','images/1.3.png'],
+	['images/4-1.2.png','images/4-3.8.png','images/4-3.4.png'],
+	['images/5-21.8.png','images/5-8.8.png','images/5-24.8.png'],
+	['images/6-2.5.png','images/6-1.5.png','images/6-1.4.png'],
+	['images/7-24.4.png','images/7-2.8.png','images/7-1.3.png'],
+	['images/8-10.9.png','images/8-2.8.png','images/8-1.3.png'],
+	];
+
+var lista = [0,1,2,3,4,5,6,7];
+lista = lista.sort(function() {return Math.random() - 0.5});
+var index=0;
+			var orden = 0;
+			var puntaje = 0;
+			var leccion = 0;
+			var respuesta;
+			var posicion_aleatoria;
+	var indice_respuesta_correcta;
+	jugar();
+
+$(".botones").click(comprobar);
+
+function comprobar()
+{ 
+	
+var respuesta = $(this).val();
+if(respuesta== indice_respuesta_correcta)
+			{
+								Swal.fire({
+								  type: 'success',
+								  text: 'Respuesta Correcta'
+								})
+								 puntaje +=1.25;
+
+			}
+				else{
+					Swal.fire({
+					 type: 'error',
+					text: 'Respuesta Incorrecta'
+					})
+			}
+			orden +=1;
+		if (orden >=8) {
+								if(puntaje>=6)
+								{
+									Swal.fire({
+										  text:"¡MUY BIEN! Tu calificacion fue de: "+puntaje,
+										  imageUrl: "images/feliz.gif",
+										    showCancelButton: true,
+										  confirmButtonColor: '#3085d6',
+										  cancelButtonColor: 'green',
+										  cancelButtonText: 'Repetir nivel',
+										  confirmButtonText: 'Ir al Menu principal'	
+										}).then((result) => {
+										  if (!result.value) {	 
+										  	location.reload();
+										  }
+										  else{
+										  	window.location="index.html";
+										  }
+										})
+								}else{
+										Swal.fire({
+										  text:"¡SIGUE PRACTICANDO! Tu calificacion fue de: "+puntaje,
+										  imageUrl: "images/triste.gif",
+										    showCancelButton: true,
+										  confirmButtonColor: '#3085d6',
+										  cancelButtonColor: 'green',
+										  cancelButtonText: 'Repetir nivel',
+										  confirmButtonText: 'Ir al Menu principal'	
+										}).then((result) => {
+										  if (!result.value) {
+										  	location.reload();
+										  }
+										  else{
+										  	window.location="index.html";
+										  }
+										})
+								}
+				}
+				else
+					{index+=1;
+						jugar();
+						}
+$(".botones").click(comprobar);
+
+}	
+
+
+function jugar(){
+	 document.getElementById("respuestas").innerHTML = '';
+	 document.getElementById("pregunta").innerHTML = '';
+							var posiciones = [0,1,2];
+						    var respuestas_reordenadas = [];
+							var imagenes_reordenadas = [];
+							var bandera = false;
+							var posicion_pregunta =Math.floor(Math.random()*posiciones.length);
+						    var respuestas_posibles = respuestas[lista[index]];
+							var imagenes_posibles = imag[lista[index]];
+							document.getElementById("pregunta").innerHTML = preguntas[lista[index]];
+							for(i in respuestas_posibles){
+									 posicion_aleatoria = Math.floor(Math.random()*posiciones.length);
+									if(posicion_aleatoria==0 && bandera == false)
+									{
+										indice_respuesta_correcta = i;
+										bandera = true;
+									}
+								respuestas_reordenadas[i] = respuestas_posibles[posiciones[posicion_aleatoria]];
+							imagenes_reordenadas[i] = imagenes_posibles[posiciones[posicion_aleatoria]];
+								posiciones.splice(posicion_aleatoria,1);
+							}
+							var txt_respuestas= "";
+								for(i in respuestas_reordenadas){
+								txt_respuestas += '<button id="btns" class="botones" value="'+i+'" onclick="comprobar()" >'+respuestas_reordenadas[i]+'<img src="'+imagenes_reordenadas[i]+'"></button>';
+							
+							}
+							document.getElementById("respuestas").innerHTML = txt_respuestas;
+
+			}
+
+
+
+
+</script>
+</body>
+</html>
